@@ -8,7 +8,7 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 abstract class AbstractUnitTestCase extends UnitTestCase
 {
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 

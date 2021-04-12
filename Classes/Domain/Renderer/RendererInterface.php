@@ -12,5 +12,5 @@ interface RendererInterface
      * @param string $mjml
      * @return string
      */
-    public function getHtmlFromMjml($mjml);
+    public function getHtmlFromMjml($mjml): string;
 }

@@ -1,15 +1,16 @@
 <?php
 namespace Saccas\Mjml\Domain\Renderer;
 
+use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
 use TYPO3\CMS\Core\Utility\CommandUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 
 class Command implements RendererInterface
 {
-    public function getHtmlFromMjml($mjml)
+    public function getHtmlFromMjml($mjml): string
     {
-        $conf = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['mjml']);
+        $conf = GeneralUtility::makeInstance(ExtensionConfiguration::class)->get('mjml');
 
         $temporaryMjmlFileWithPath = GeneralUtility::tempnam('mjml_', '.mjml');
 
@@ -36,7 +37,7 @@ class Command implements RendererInterface
      * @param string $args
      * @return string
      */
-    protected function getEscapedCommand(string $cmd, string $args)
+    protected function getEscapedCommand(string $cmd, string $args): string
     {
         $escapedCmd = escapeshellcmd($cmd);
 

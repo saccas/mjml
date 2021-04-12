@@ -11,12 +11,12 @@ class MjmlEmailFinisher extends \TYPO3\CMS\Form\Domain\Finishers\EmailFinisher
 {
     /**
      * @param FormRuntime $formRuntime
+     * @param string $format
      * @return StandaloneView
      * @throws FinisherException
      */
-    protected function initializeStandaloneView(FormRuntime $formRuntime): StandaloneView
+    protected function initializeStandaloneView(FormRuntime $formRuntime, string $format = 'Html'): StandaloneView
     {
-        $format = ucfirst($this->parseOption('format'));
         $standaloneView = $this->objectManager->get(MjmlBasedView::class);
 
         if (isset($this->options['templatePathAndFilename'])) {
@@ -28,10 +28,12 @@ class MjmlEmailFinisher extends \TYPO3\CMS\Form\Domain\Finishers\EmailFinisher
             if (!isset($this->options['templateName'])) {
                 throw new FinisherException('The option "templateName" must be set for the EmailFinisher.', 1327058829);
             }
-            $this->options['templateName'] = strtr($this->options['templateName'], [
+            // Use local variable instead of augmenting the options to
+            // keep the format intact when sending multi-format mails
+            $templateName = strtr($this->options['templateName'], [
                 '{@format}' => $format
             ]);
-            $standaloneView->setTemplate($this->options['templateName']);
+            $standaloneView->setTemplate($templateName);
         }
 
         $standaloneView->assign('finisherVariableProvider', $this->finisherContext->getFinisherVariableProvider());

@@ -31,7 +31,7 @@ class MjmlBasedViewTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function viewCallsRendererAndReturnsRenderedHtml()
+    public function viewCallsRendererAndReturnsRenderedHtml(): void
     {
         $expectedHtml = '<h1>Simple HTML</h1>';
         $rendererMock = $this->getMockBuilder(RendererInterface::class)->getMock();

@@ -7,10 +7,7 @@ use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 
 class MjmlBasedView extends StandaloneView
 {
-    /**
-     * @var RendererInterface
-     */
-    protected $renderer;
+    protected ?RendererInterface $renderer = null;
 
     public function __construct(ContentObjectRenderer $contentObject = null, RendererInterface $renderer = null)
     {
@@ -22,7 +19,7 @@ class MjmlBasedView extends StandaloneView
         }
     }
 
-    public function render($actionName = null)
+    public function render($actionName = null): string
     {
         return $this->renderer->getHtmlFromMjml(parent::render($actionName));
     }

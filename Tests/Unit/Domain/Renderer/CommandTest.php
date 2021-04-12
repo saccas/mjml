@@ -11,12 +11,9 @@ use TYPO3\CMS\Extbase\Object\ObjectManager;
 
 class CommandTest extends AbstractUnitTestCase
 {
-    /**
-     * @var ObjectManager
-     */
-    protected $objectManager;
+    protected ObjectManager $objectManager;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
         $this->objectManager = GeneralUtility::makeInstance(ObjectManager::class);
@@ -25,7 +22,7 @@ class CommandTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function htmlIsReturnedForMjml()
+    public function htmlIsReturnedForMjml(): void
     {
         // Mock extension to be active, to enable path fetching to call node binary.
         $packageMock = $this->getMockBuilder(Package::class)
